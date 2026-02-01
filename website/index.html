@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artifacta Null - Discovery & Exploration</title>
+    <link rel="icon" type="image/png" href="minecraft_dirt.png">
+    <link rel="stylesheet" href="style.css">
+    <!-- 3D Globe Dependencies -->
+    <script src="https://unpkg.com/three"></script>
+    <script src="https://unpkg.com/globe.gl"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="innovation-label">innovation project</div>
+
+    <div id="search-engine" class="active">
+        <div class="search-main-layout">
+            <div class="search-container">
+                <div class="search-logo">Explorer<span>Search</span></div>
+                <div class="search-bar-wrapper">
+                    <input type="text" id="search-input" placeholder="Search the past..." autocomplete="off">
+                    <button id="search-btn">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path fill="currentColor"
+                                d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="search-suggestions">
+                    <span>Try: archaeology, ancient egypt, dinosaur fossils</span>
+                </div>
+            </div>
+
+            <div class="mission-box">
+                <h3>Our Economic Mission</h3>
+                <p>Archaeologists spend <strong>$330M annually</strong> in the USA alone, and billions globally, yet
+                    failure rates remain staggeringly high.</p>
+
+                <div class="budget-simulator">
+                    <div class="simulator-header">Global Spending Pulse</div>
+                    <div class="cost-counter" id="waste-counter">$0</div>
+                    <div class="counter-label">Wasted on inefficient excavation this year</div>
+
+                    <div class="simulator-controls">
+                        <label>Optimization Target: <span id="opt-value">50</span>%</label>
+                        <input type="range" id="optimization-slider" min="10" max="90" value="50">
+                    </div>
+
+                    <div class="savings-preview">
+                        Potential Savings: <span id="savings-amount">$0</span>
+                    </div>
+                    <div class="savings-progress-bar">
+                        <div id="savings-fill" style="width: 50%;"></div>
+                    </div>
+                </div>
+
+                <p>Artifacta Null aims to cut these costs by 80% through predictive AI localization, ensuring we
+                    preserve both history and our economy.</p>
+            </div>
+        </div>
+
+        <div id="search-results" class="hidden">
+            <div class="results-stats">About 1,240,000,000 results (0.42 seconds)</div>
+
+            <!-- Featured Snippet -->
+            <div class="featured-snippet">
+                <div class="snippet-header">
+                    <span class="snippet-source">Artifacta Null</span>
+                    <span class="snippet-url">www.ArtifactaNull.com</span>
+                    <span class="snippet-tag">Featured Result</span>
+                </div>
+                <div class="snippet-content">
+                    <div class="snippet-text">
+                        <h2>What is Archaeology?</h2>
+                        <p>Archaeology is the scientific study of human activity through the recovery and analysis of
+                            material culture. The archaeological record consists of artifacts, architecture, biofacts or
+                            ecofacts, sites, and cultural landscapes.</p>
+                        <ul class="snippet-sections">
+                            <li><strong>Prehistory:</strong> Exploration of human history before written records.</li>
+                            <li><strong>Ancient Civilizations:</strong> Studying the rise of complex societies.</li>
+                            <li><strong>Medieval Archaeology:</strong> Uncovering the post-classical world.</li>
+                            <li><strong>Modern Techniques:</strong> LiDAR, DNA analysis, and digital reconstruction.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="snippet-images">
+                        <img src="./archaeology_excavation_site.png" alt="Excavation Site">
+                        <img src="./ancient_artifacts_collection.png" alt="Artifacts">
+                    </div>
+                </div>
+                <div class="snippet-footer">
+                    <a href="#" id="visit-site-btn">Visit Artifacta Null →</a>
+                </div>
+            </div>
+
+            <!-- Normal Results -->
+            <div class="regular-result">
+                <h3>Archaeology - Wikipedia</h3>
+                <cite>https://en.wikipedia.org/wiki/Archaeology</cite>
+                <p>Archaeology or archeology is the study of human activity through the recovery and analysis of
+                    material culture. The archaeological record consists of...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Artifacta Null Website -->
+    <div id="main-site" class="hidden">
+        <nav class="navbar">
+            <div class="logo">Artifacta<span>Null</span></div>
+            <ul class="nav-links">
+                <li><a href="#map">World Map</a></li>
+                <li><a href="#timeline">Timeline</a></li>
+                <li><a href="#gallery">Artifacts</a></li>
+                <li><a href="#" id="back-to-search">Search</a></li>
+            </ul>
+        </nav>
+
+        <header class="hero">
+            <div class="hero-content">
+                <h1>Unearthing the Secrets of Time</h1>
+                <p>Join the world's most authoritative hub for archaeological discovery, from the first tools to the
+                    fall of empires.</p>
+                <a href="#map" class="cta-btn">Start Exploring</a>
+            </div>
+        </header>
+
+        <section id="map" class="map-section">
+            <div class="map-container">
+                <div class="map-search-overlay">
+                    <div class="map-header-branding">
+                        <h2>Artifact Discovery Map</h2>
+                        <p>Exploring the Global Record of Humanity</p>
+                    </div>
+                    <div class="map-search-bar">
+                        <input type="text" id="map-site-search" placeholder="Search major artifacts or sites..."
+                            autocomplete="off">
+                        <button id="map-search-btn">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path fill="currentColor"
+                                    d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="map-search-bar home-setup">
+                        <input type="text" id="home-location-input" placeholder="Set your location..."
+                            autocomplete="off">
+                        <button id="set-home-btn" title="Set your location to enable navigation">
+                            Set Home
+                        </button>
+                    </div>
+                </div>
+                <div id="interactive-map"></div>
+                <!-- Dynamic Info Panel for 3D Globe -->
+                <div id="globe-info-panel" class="hidden">
+                    <button id="close-info-panel">&times;</button>
+                    <div id="info-panel-content">
+                        <h2 id="info-title">Location Name</h2>
+                        <div id="info-body">
+                            <p id="info-description">Historical and archaeological data will appear here...</p>
+                            <button id="navigate-btn" class="hidden">Navigate There &rarr;</button>
+                            <p id="nav-error" class="hidden">Please set your home location first!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="site-tooltip" id="map-tooltip">Discover the past</div>
+            </div>
+        </section>
+
+        <section id="timeline" class="section dark">
+            <div class="section-header">
+                <h2>The Human Timeline</h2>
+                <p>Slide through history to see how our species evolved and built civilizations.</p>
+            </div>
+            <div class="timeline-container">
+                <input type="range" min="0" max="100" value="0" id="timeline-slider">
+                <div class="timeline-display">
+                    <div class="timeline-event" id="timeline-label">
+                        <h3 id="event-year">2.5 Million BCE</h3>
+                        <p id="event-desc">Early humans begin crafting stone tools in East Africa.</p>
+                    </div>
+                </div>
+                <div class="timeline-markers">
+                    <span>Prehistory</span>
+                    <span>Bronze Age</span>
+                    <span>Iron Age</span>
+                    <span>Medieval</span>
+                    <span>Modern</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="section">
+            <div class="section-header">
+                <h2>Artifact Gallery</h2>
+                <p>Examine pieces of history with interactive details.</p>
+            </div>
+            <div class="artifacts-grid">
+                <div class="artifact-card"
+                    data-fact="The Mask of Tutankhamun is a gold mask of the 18th-dynasty ancient Egyptian Pharaoh Tutankhamun.">
+                    <img src="./ancient_artifacts_collection.png" alt="Golden Mask">
+                    <div class="artifact-info">
+                        <h3>Pharaoh's Gold</h3>
+                        <p>Hover for facts</p>
+                    </div>
+                </div>
+                <div class="artifact-card"
+                    data-fact="This Roman bust represents a transition in art style during the height of the Empire.">
+                    <img src="./ancient_ruins_city.png" alt="Roman Bust">
+                    <div class="artifact-info">
+                        <h3>Imperial Ruins</h3>
+                        <p>Hover for facts</p>
+                    </div>
+                </div>
+                <div class="artifact-card"
+                    data-fact="Ancient stone tools prove complex cognitive abilities in early hominids.">
+                    <img src="./archaeology_excavation_site.png" alt="Stone Tools">
+                    <div class="artifact-info">
+                        <h3>Lithic Tools</h3>
+                        <p>Hover for facts</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2026 Archaeology Prime. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
